@@ -53,8 +53,11 @@ app.MapHealthChecks("/healthz/live", new HealthCheckOptions
     Predicate = (_) => false
 });
 
-
-app.UseHttpsRedirection();
+// only redirect in dev mode here.. as in container we dont want to redirect (i.e use http not https)
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 

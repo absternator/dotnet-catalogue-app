@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb-statefulset
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  serviceName: mongodb-service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo
+        ports:
+        - containerPort: 27017
+          name: mongodb
+          # map volume to inside pod
+        volumeMounts:
+         - name: data # mathes volume made
+           mountPath: /data/db
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: mongoadmin
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: catalogue-secrets
+                key: mongodb-password
+  #  persistant volume volume
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+    # 1 node can read at wirte at one time
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  clusterIP: None
+  selector:
+    app: mongodb # match with app in deployment
+  ports:
+  - port: 27017
+    targetPort: 27017
+
+

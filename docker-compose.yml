@@ -1,0 +1,35 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  catalogue:
+    image: absternator/catalogue:v2
+    container_name: api
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    ports:
+      - 8080:80
+    # working_dir: /app
+    # volumes:
+    #   - ./:/app
+    environment:
+       MongoDbSettings:Host: mongo
+       MongoDbSettings:Password: Pass#word1
+  
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - mongodbdata:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: Pass#word1
+
+volumes:
+  mongodbdata: 
+
+
