@@ -1,6 +1,6 @@
-// using Catalogue.Models;
+// using Catalogue.Api.Models;
 
-// namespace Catalogue.Repositories;
+// namespace Catalogue.Api.Repositories;
 
 
 // public class InMemoryItemRepository : IItemRepository

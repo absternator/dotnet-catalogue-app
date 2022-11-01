@@ -1,5 +1,5 @@
-using Catalogue.Config;
-using Catalogue.Repositories;
+using Catalogue.Api.Config;
+using Catalogue.Api.Repositories;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;

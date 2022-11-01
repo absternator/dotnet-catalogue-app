@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Catalogue.Dtos;
+namespace Catalogue.Api.Dtos;
 
 public record UpdateItemDto
 {

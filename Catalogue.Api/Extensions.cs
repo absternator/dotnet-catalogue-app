@@ -1,7 +1,7 @@
-using Catalogue.Dtos;
-using Catalogue.Models;
+using Catalogue.Api.Dtos;
+using Catalogue.Api.Models;
 
-namespace Catalogue;
+namespace Catalogue.Api;
 
 public static class Extensions
 {

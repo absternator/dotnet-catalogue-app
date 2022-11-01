@@ -1,20 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
-using Catalogue.Repositories;
-using Catalogue.Models;
-using Catalogue.Dtos;
+using Catalogue.Api.Repositories;
+using Catalogue.Api.Models;
+using Catalogue.Api.Dtos;
 
 
-namespace Catalogue.Controllers;
+namespace Catalogue.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ItemsController : ControllerBase
 {
     private readonly IItemRepository repository;
+    private readonly ILogger<ItemsController> logger;
 
-    public ItemsController(IItemRepository repository)
+    public ItemsController(IItemRepository repository, ILogger<ItemsController> logger)
     {
         this.repository = repository;
+        this.logger = logger;
     }
 
     /// <summary>
@@ -25,6 +27,7 @@ public class ItemsController : ControllerBase
     public async Task<ActionResult<IEnumerable<ItemDto>>> GetItems()
     {
         var items = (await repository.GetItemsAsync()).Select(item => item.AsDto());
+        logger.LogInformation($"{DateTime.UtcNow.ToString("hh:mm:ss")}: Retrieved {items.Count()} items");
         return await Task.FromResult(items.ToList());
     }
 

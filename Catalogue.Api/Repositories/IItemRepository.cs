@@ -1,6 +1,6 @@
-using Catalogue.Models;
+using Catalogue.Api.Models;
 
-namespace Catalogue.Repositories;
+namespace Catalogue.Api.Repositories;
 public interface IItemRepository
 {
     Task<Item?> GetItemAsync(Guid id);

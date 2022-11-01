@@ -1,8 +1,8 @@
-﻿using Catalogue.Models;
+﻿using Catalogue.Api.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Catalogue.Repositories
+namespace Catalogue.Api.Repositories
 {
     public class MongoDbItemsRepository : IItemRepository
     {

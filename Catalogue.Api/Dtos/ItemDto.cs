@@ -1,5 +1,5 @@
 
-namespace Catalogue.Dtos;
+namespace Catalogue.Api.Dtos;
 
 public record ItemDto
 {
