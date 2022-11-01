@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catalogue-deployment
+  name: catalogue
 spec:
   selector:
     matchLabels:
@@ -24,7 +24,7 @@ spec:
         - containerPort: 80
         env:
           - name: MongoDbSettings__Host
-            value: mongo
+            value: mongodb-service
           - name: MongoDbSettings__Password
             valueFrom:
               secretKeyRef:
@@ -39,6 +39,8 @@ spec:
           httpGet:
             path: /healthz/ready
             port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
           
 ---
 apiVersion: v1
