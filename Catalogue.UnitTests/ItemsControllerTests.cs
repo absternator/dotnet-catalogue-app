@@ -16,16 +16,13 @@ public class ItemsControllerTests
     private readonly Mock<ILogger<ItemsController>> loggerMock = new();
     private Random rand = new();
     private Item CreateRandomItem()
+    => new()
     {
-        return new()
-        {
-            Id = Guid.NewGuid(),
-            Name = Guid.NewGuid().ToString(),
-            Price = rand.Next(1000),
-            CreatedDate = DateTimeOffset.Now,
-        };
-
-    }
+        Id = Guid.NewGuid(),
+        Name = Guid.NewGuid().ToString(),
+        Price = rand.Next(1000),
+        CreatedDate = DateTimeOffset.Now,
+    };
 
     [Fact]
     public async void GetItem_UnexistingItem_ReturnsNotFound()
